@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
   if(serverid === message.guild.id) return message.channel.send("Ne možeš koristiti ID svog servera!");
   
   let server = client.guilds.get(serverid);
-  if(server === undefined || server === null) return message.channel.send("Partners Bot nije član tog servera!");
+  if(server === undefined) return message.channel.send("Partners Bot nije član tog servera!");
   
   let serverdb = await client.db.fetch(`partner_${serverid}_${message.guild.id}`);
   if(serverdb === null) return message.channel.send("Taj server nije tražio partnerstvo sa tobom!");

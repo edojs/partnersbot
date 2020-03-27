@@ -10,12 +10,15 @@ exports.run = async (client, message, args) => {
   if(serverid === message.guild.id) return message.channel.send("Ne možeš sebi poslati zahtjev za partnerstvo!");
   
   let server = client.guilds.get(serverid);
-  if(server === null) return message.channel.send("Partners Bot se ne nalazi na tom serveru!");
+  if(server === undefined) return message.channel.send("Partners Bot se ne nalazi na tom serveru!");
   
   let partner = await client.db.fetch(`default_${serverid}`);
   if(partner === null) return message.channel.send("Taj server nije postavio zadani kanal!");
   partner = client.channels.get(partner);
-  if(partner === null) return message.channel.send("Taj server nije postavio zadani kanal!");
+  if(partner === undefined) return message.channel.send("Taj server nije postavio zadani kanal!");
+  
+  let pending = await client.db.fetch(`partner_${message.guild.id}_${serverid}`, { target: ".pending" });
+  if(pending) return message.channel.send("Već si poslao/la zahtjev za partnerstvo tom serveru!");
   
   let serverdb = await client.db.fetch(`partner_${message.guild.id}_${serverid}`);
   if(serverdb !== null) return message.channel.send("Sa tim serverom imaš već uspostavljeno partnerstvo!");
