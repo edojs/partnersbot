@@ -1,0 +1,29 @@
+{
+  "name": "partners-bot",
+  "version": "1.0.0",
+  "description": "Partners Bot",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "discord.js": "^11.3.0",
+    "enmap": "^5.2.4",
+    "quick.db": "^6.3.2",
+    "parse-ms": "^2.0.0",
+    "hastebin-gen": "^2.0.5"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/build-a-discord-bot"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
