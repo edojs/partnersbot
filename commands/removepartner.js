@@ -1,5 +1,5 @@
 exports.run = async (client, message, args) => {
-  if(message.author.id !== message.guild.ownerID) return message.channel.send("Nisi vlasnik ovog servera!");
+  if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("Nemaš permisiju za korištenje ove komande!");
   let slot = args[0];
   if(!slot) return message.channel.send("Nisi napisao/la slot!");
   if(isNaN(slot) || slot < 1 || slot > 5) return message.channel.send("Nisi pravilno napisao/la slot!");

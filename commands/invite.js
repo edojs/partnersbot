@@ -2,7 +2,7 @@ exports.run = (client, message, args) => {
   let inviteEmbed = new client.Discord.RichEmbed()
   .setColor("#000000")
   .setAuthor("Partners Bot - invite link!", client.user.displayAvatarURL)
-  .setDescription("[INVITE](https://discordapp.com/oauth2/authorize?&client_id=689958988867174401&scope=bot&permissions=71302353)")
+  .setDescription("[INVITE](https://discordapp.com/oauth2/authorize?&client_id=689958988867174401&scope=bot&permissions=67624000)")
   .setFooter(client.config.embed.footer)
   .setTimestamp();
   message.author.send(inviteEmbed).then(() => {

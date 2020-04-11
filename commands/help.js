@@ -1,9 +1,11 @@
+const error = require("../apierrors.js");
+
 exports.run = (client, message, args) => {
   var helpEmbed = new client.Discord.RichEmbed() // Creates a new rich embed (see https://discord.js.org/#/docs/main/stable/class/RichEmbed) 
     .setAuthor("Zdravo, "+message.author.username+"#"+message.author.discriminator, message.author.displayAvatarURL) 
     .setDescription("**Napomena**: ukoliko je potreban unos dodatnih varijabli u komandu, one su označene sa `[]` i `()` u listi komandi.") 
     .addField("🤝 Komande za partnerstvo!", // Sets the title of the field 
-              "**"+client.config.prefix+"setchannel [ID kanala]** - postavljanje zadanog kanala za bota!\n"+
+              "**"+client.config.prefix+"setchannel [#kanal]** - postavljanje zadanog kanala za bota!\n"+
               "**"+client.config.prefix+"resetchannel** - resetovanje zadanog kanala!\n"+
               "**"+client.config.prefix+"partners** - lista partnera!\n"+
               "**"+client.config.prefix+"addpartner [ID servera] [slot (1-5)]** - slanje zahtjeva za partnerstvo (max. 5)!\n"+ 
@@ -18,5 +20,5 @@ exports.run = (client, message, args) => {
     .setColor(client.config.embed.color) // Sets the color of the embed 
     .setFooter(client.config.embed.footer) // Sets the footer of the embed 
     .setTimestamp(); 
-    message.channel.send(helpEmbed);
+    message.channel.send(helpEmbed).catch(err => message.channel.send(error(err.code)));
 }

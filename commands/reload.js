@@ -1,4 +1,5 @@
 exports.run = (client, message, args) => { 
+  if(message.author.id !== client.config.dev.id) return;
   if(!args || args.length < 1) return message.channel.send("Napiši koju komandu želiš reloadati!"); 
   const commandName = args[0]; 
   // Check if the command exists and is valid 

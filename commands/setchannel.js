@@ -1,5 +1,5 @@
 exports.run = async (client, message, args) => {
-  if(message.author.id !== message.guild.ownerID) return message.channel.send("Nisi vlasnik ovog servera!");
+  if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("Nemaš permisiju za korištenje ove komande!");
   let dbchannel = await client.db.fetch(`default_${message.guild.id}`);
   if(dbchannel !== null) {
     dbchannel = message.guild.channels.get(dbchannel);

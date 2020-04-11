@@ -1,5 +1,5 @@
 exports.run = async (client, message, args) => {
-  if(message.author.id !== "495897264108339200") return;
+  if(message.author.id !== client.config.dev.id) return;
   let status = args.join(" ");
   if(!status) return message.channel.send("Napiši koji status želiš postaviti!");
   

@@ -1,5 +1,5 @@
 exports.run = async (client, message, args) => {
-  if(message.author.id !== message.guild.ownerID) return message.channel.send("Nisi vlasnik ovog servera!");
+  if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("Nemaš permisiju za korištenje ove komande!");
   
   let slot = args[0];
   if(!slot) return message.channel.send("Nisi napisao/la slot!");
@@ -24,6 +24,6 @@ exports.run = async (client, message, args) => {
   client.db.delete(`partner_${message.guild.id}_${serverid}`)
   .then(() => {
     message.channel.send("Poništio/la si zahtjev za partnerstvo sa tim serverom!");
-    if(i == 0) channel.send("Server **"+server.name+"** je poništio zahtjev za partnerstvo!");
+    if(i == 0) channel.send("Server **"+message.guild.name+"** je poništio zahtjev za partnerstvo!");
   });
 }

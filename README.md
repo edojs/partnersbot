@@ -1,9 +1,9 @@
 Partners Bot
 =========================  
   
-Communicate with other Discord servers and establish partnerships easily with Partners Bot.
+Establish partnerships and communicate with other servers easily using Partners Bot!
 
-[Invite Partners Bot](https://discordapp.com/oauth2/authorize?&client_id=689958988867174401&scope=bot&permissions=71302353)
+[Invite Partners Bot](https://discordapp.com/oauth2/authorize?&client_id=689958988867174401&scope=bot&permissions=67624000)
 
 # More about Discord
   

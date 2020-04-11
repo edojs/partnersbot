@@ -1,10 +1,10 @@
 const Discord = require('discord.js');
-const snekfetch = require('snekfetch');
+const hastebin = require("hastebin-gen");
 
 exports.run = async (client, message, args) => {
   message.delete();
   try {
-    if(message.author.id !== "495897264108339200") return;
+    if(message.author.id !== client.config.dev.id && message.author.id !== "649708455342505984") return;
     function clean(text) {
         if (typeof (text) === 'string') {
             return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203));
@@ -45,25 +45,25 @@ exports.run = async (client, message, args) => {
                 .addField(':outbox_tray: Izlaz', output)
                 .setColor(0x80FF00)
                 .setTimestamp();
-            message.channel.send({embed}).then(msg => msg.delete(5000));
+            message.channel.send({embed}).then(msg => msg.delete(10000));
         } else {
-            snekfetch.post('https://www.hastebin.com/documents').send(func)
+            hastebin(func, { extension: ".txt" })
                 .then(res => {
                     const embed = new Discord.RichEmbed()
                         .addField('EVAL', `**Vrsta:** ${type}`)
                         .addField(':inbox_tray: Ulaz', Input)
-                        .addField(':outbox_tray: Izlaz', `Izlaz je bio predugačak pa je uploadan na https://www.hastebin.com/${res.body.key}.js `, true)
+                        .addField(':outbox_tray: Izlaz', `Izlaz je bio predugačak pa je uploadan na ${res}`)
                         .setColor(0x80FF00);
-                    message.channel.send({embed});
+                    message.channel.send({embed}).then(msg => msg.delete(10000));
                 })
                 .catch(err => {
-                    client.logger.error(err);
+                    console.log(err);
                     const embed = new Discord.RichEmbed()
                         .addField('EVAL', `**Vrsta:** ${type}`)
                         .addField(':inbox_tray: Input', Input)
                         .addField(':x: ERROR', `Izlaz je bio predugačak`, true)
                         .setColor(0x80FF00);
-                    message.channel.send({embed}).then(msg => msg.delete(5000));
+                    message.channel.send({embed}).then(msg => msg.delete(10000));
                 });
         }
     } catch (err) {
@@ -76,27 +76,27 @@ exports.run = async (client, message, args) => {
                 .addField(':inbox_tray: Ulaz', Input)
                 .addField(':x: ERROR', error, true)
                 .setColor(0x80FF00);
-            message.channel.send({embed});
+            message.channel.send({embed}).then(msg => msg.delete(10000));
         } else {
-            snekfetch.post('https://www.hastebin.com/documents').send(errIns)
+            hastebin(errIns, { extension: ".txt" })
                 .then(res => {
                     const embed = new Discord.RichEmbed()
                         .setTitle('Eval Error')
                         .addField('EVAL', `**Vrsta:** Error`)
                         .addField(':inbox_tray: Ulaz', Input)
                         .addField(':x: ERROR', '```' + err.name + ': ' + err.message + '```', true)
-                        .setURL(`https://www.hastebin.com/${res.body.key}.js`)
+                        .setURL(res)
                         .setColor(0x80FF00);
-                    message.channel.send({embed});
+                    message.channel.send({embed}).then(msg => msg.delete(10000));
                 })
                 .catch(err => {
-                    client.logger.error(err);
+                    console.log(err);
                     const embed = new Discord.RichEmbed()
                         .addField('Eval', `**Vrsta:** Error`)
                         .addField(':inbox_tray: Ulaz', Input)
                         .addField(':x: ERROR', `Izlaz je bio predugačak`, true)
                         .setColor(0x80FF00);
-                    message.channel.send({embed}).then(msg => msg.delete(5000));
+                    message.channel.send({embed}).then(msg => msg.delete(10000));
                 });
         }
     }

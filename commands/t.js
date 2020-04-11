@@ -37,6 +37,6 @@ exports.run = async (client, message, args) => {
   channeldb.send(tekst, embed)
   .then(() => {
     message.channel.send("Poslao/la si poruku na server **"+server.name+"**")
-    .then(msg => msg.delete(3000));
+    .then(msg => msg.delete(3000))
   }).catch(err => message.channel.send("Nisam mogao poslati poruku zbog: "+err));
 }
